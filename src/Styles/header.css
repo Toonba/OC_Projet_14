@@ -1,0 +1,38 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top:10px;
+  border-bottom: solid 2px #93AD18;
+}
+
+header .logo img {
+  width:150px;
+  margin-left: 100px;
+}
+
+header nav {
+  margin-right: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 500px
+}
+
+header nav a {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+  font-size: 24px;
+  background-color: #93AD18;
+  padding: 10px 20px;
+  border-radius: 10px;
+}
+
+header nav a:hover {
+  opacity: 0.8;
+}
+
+header nav .active {
+  text-decoration: underline;
+}
