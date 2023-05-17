@@ -50,16 +50,20 @@
   width: var(--dropdown-width);
   position: absolute;
   background-color: white;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
   border-bottom-left-radius: var(--dropdown-border-radius);
   border-bottom-right-radius: var(--dropdown-border-radius);
   border: var(--dropdown-border-style);
   border-top: none;
-  max-height: 150px;
-  overflow: auto;
+  height: 150px;
+  overflow-y: scroll;
 }
+
+.dropdown-container .dropdown-item .dropdown-item-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
 .dropdown-container .dropdown-item span {
   width: 100%;
   text-align: center;

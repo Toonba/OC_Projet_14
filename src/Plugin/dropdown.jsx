@@ -51,13 +51,15 @@ function DropDown({ data }) {
           <i className={isOpen === true ? 'fa-solid fa-chevron-up' : 'fa-solid fa-chevron-down'}></i>
         </div>
         <div className={`dropdown-item ${isOpen === true ? 'show' : 'hide'} ${dropdownItem.options.length > 5 ? 'long' : 'short'}`}>
-          {dropdownItem.options.map((element) => {
-            return (
-              <span key={element} data-value={element} onClick={(e) => chooseOption(e)} className={current === element ? 'active' : ''}>
-                {element}
-              </span>
-            )
-          })}
+          <div className="dropdown-item-content">
+            {dropdownItem.options.map((element) => {
+              return (
+                <span key={element} data-value={element} onClick={(e) => chooseOption(e)} className={current === element ? 'active' : ''}>
+                  {element}
+                </span>
+              )
+            })}
+          </div>
         </div>
       </div>
     </div>
