@@ -1,6 +1,10 @@
 import '../../Styles/createEmployeeForm.css'
+import DropDown from '../../Plugin/dropdown'
+import { statesData } from '../../Data/stateData'
+import { departmentData } from '../../Data/departmentData'
 
 export function CreateEmployeeForm() {
+  const statesDataRefined = { label: statesData.label, options: statesData.options.map((element) => element.name) }
   return (
     <>
       <form action="#" id="create-employeer-form">
@@ -8,23 +12,23 @@ export function CreateEmployeeForm() {
           <legend>Employee's information</legend>
           <div className="first-row">
             <div className="firstname">
-              <label for="first-name">First Name</label>
+              <label htmlFor="first-name">First Name</label>
               <input type="text" id="first-name" placeholder="Steve" />
             </div>
 
             <div className="lastname">
-              <label for="last-name">Last Name</label>
+              <label htmlFor="last-name">Last Name</label>
               <input type="text" id="last-name" placeholder="Rogers" />
             </div>
           </div>
           <div className="second-row">
             <div className="birth-date">
-              <label for="date-of-birth">Date of Birth</label>
+              <label htmlFor="date-of-birth">Date of Birth</label>
               <input id="date-of-birth" type="text" />
             </div>
 
             <div className="start-date">
-              <label for="start-date">Start Date</label>
+              <label htmlFor="start-date">Start Date</label>
               <input id="start-date" type="text"></input>
             </div>
           </div>
@@ -35,38 +39,30 @@ export function CreateEmployeeForm() {
 
           <div className="first-row">
             <div className="street">
-              <label for="street">Street</label>
+              <label htmlFor="street">Street</label>
               <input id="street" type="text" placeholder="1600, Pennsylvania Avenue NW" />
             </div>
 
             <div className="city">
-              <label for="city">City</label>
+              <label htmlFor="city">City</label>
               <input id="city" type="text" placeholder="Washington, DC" />
             </div>
           </div>
 
           <div className="second-row">
             <div className="state">
-              <label for="state">State</label>
-              <select name="state" id="state"></select>
+              <DropDown data={statesDataRefined} />
             </div>
 
             <div className="zip">
-              <label for="zip-code">Zip Code</label>
+              <label htmlFor="zip-code">Zip Code</label>
               <input id="zip-code" type="number" placeholder="20500" />
             </div>
           </div>
         </fieldset>
 
         <div className="department">
-          <label for="department">Department</label>
-          <select name="department" id="department">
-            <option>Sales</option>
-            <option>Marketing</option>
-            <option>Engineering</option>
-            <option>Human Resources</option>
-            <option>Legal</option>
-          </select>
+          <DropDown data={departmentData} />
         </div>
       </form>
 

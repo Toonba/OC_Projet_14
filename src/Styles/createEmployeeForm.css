@@ -38,7 +38,7 @@ legend {
 .zip,
 .state,
 .department {
-  width: 30%;
+  width: 40%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -49,6 +49,8 @@ legend {
 .address input,
 .department select,
 .save {
+  width: 200px;
+  font-size: 16px;
   padding: 5px 10px;
   border-radius: 5px;
   border: solid 1px black;
@@ -61,7 +63,7 @@ legend {
 }
 
 .button {
-  width: 70%;
+  width: 5%;
   margin: 10px auto;
   display: flex;
   justify-content: center;
