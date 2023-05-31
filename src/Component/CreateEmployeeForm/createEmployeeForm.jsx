@@ -2,9 +2,46 @@ import '../../Styles/createEmployeeForm.css'
 import DropDown from '../../Plugin/dropdown'
 import { statesData } from '../../Data/stateData'
 import { departmentData } from '../../Data/departmentData'
+import { useRef, useState } from 'react'
+import Modal from '../../Modal/modale'
 
 export function CreateEmployeeForm() {
+  const [isOpen, setIsOpen] = useState(false)
   const statesDataRefined = { label: statesData.label, options: statesData.options.map((element) => element.name) }
+  const firstNameRef = useRef(null)
+  const lastNameRef = useRef(null)
+  const dateOfBirthRef = useRef(null)
+  const startDateRef = useRef(null)
+  const streetRef = useRef(null)
+  const cityRef = useRef(null)
+  const zipCodeRef = useRef(null)
+  // const stateRef = useRef(null)
+  // const departementRef = useRef(null)
+
+  const handleModalClose = () => {
+    setIsOpen(false) 
+  }
+  
+  const handleSelect = () =>{
+    
+  }
+
+  const handleSubmit = () => {
+    const employeeData = {
+      firstName: firstNameRef.current.value,
+      lastName: lastNameRef.current.value,
+      dateOfBirth: dateOfBirthRef.current.value,
+      startDate: startDateRef.current.value,
+      street: streetRef.current.value,
+      city: cityRef.current.value,
+      zipCode: zipCodeRef.current.value
+      // state: stateRef.current.value,
+      // department: departementRef.current.value
+    }
+    console.log(employeeData)
+    setIsOpen(!isOpen)
+  }
+
   return (
     <>
       <form action="#" id="create-employeer-form">
@@ -13,23 +50,23 @@ export function CreateEmployeeForm() {
           <div className="first-row">
             <div className="firstname">
               <label htmlFor="first-name">First Name</label>
-              <input type="text" id="first-name" placeholder="Steve" />
+              <input type="text" id="first-name" placeholder="Steve" ref={firstNameRef} />
             </div>
 
             <div className="lastname">
               <label htmlFor="last-name">Last Name</label>
-              <input type="text" id="last-name" placeholder="Rogers" />
+              <input type="text" id="last-name" placeholder="Rogers" ref={lastNameRef} />
             </div>
           </div>
           <div className="second-row">
             <div className="birth-date">
               <label htmlFor="date-of-birth">Date of Birth</label>
-              <input id="date-of-birth" type="text" />
+              <input id="date-of-birth" type="text" ref={dateOfBirthRef} />
             </div>
 
             <div className="start-date">
               <label htmlFor="start-date">Start Date</label>
-              <input id="start-date" type="text"></input>
+              <input id="start-date" type="text" ref={startDateRef} />
             </div>
           </div>
         </fieldset>
@@ -40,12 +77,12 @@ export function CreateEmployeeForm() {
           <div className="first-row">
             <div className="street">
               <label htmlFor="street">Street</label>
-              <input id="street" type="text" placeholder="1600, Pennsylvania Avenue NW" />
+              <input id="street" type="text" placeholder="1600, Pennsylvania Avenue NW" ref={streetRef} />
             </div>
 
             <div className="city">
               <label htmlFor="city">City</label>
-              <input id="city" type="text" placeholder="Washington, DC" />
+              <input id="city" type="text" placeholder="Washington, DC" ref={cityRef} />
             </div>
           </div>
 
@@ -56,19 +93,22 @@ export function CreateEmployeeForm() {
 
             <div className="zip">
               <label htmlFor="zip-code">Zip Code</label>
-              <input id="zip-code" type="number" placeholder="20500" />
+              <input id="zip-code" type="number" placeholder="20500" ref={zipCodeRef} />
             </div>
           </div>
         </fieldset>
 
         <div className="department">
           <DropDown data={departmentData} />
+          </div>
+        <div className="button">
+          <button className="save" onClick={handleSubmit}>
+            Save
+          </button>
         </div>
       </form>
 
-      <div className="button">
-        <button className="save">Save</button>
-      </div>
+      <Modal show={isOpen} onClose={handleModalClose} />
     </>
   )
 }

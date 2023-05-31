@@ -1,12 +1,12 @@
-import '../Styles/dropdown.css'
+import './dropdown.css'
 import { useState, useEffect, useRef } from 'react'
 
-function DropDown({ data }) {
+export function DropDown({ data }) {
   const alphabétique = true
   const dropdownItem = data
   const [isOpen, setIsOpen] = useState(false)
   const [current, setCurrent] = useState(null)
-  const ref = useRef(null)
+  const dropDownContainerRef = useRef(null)
 
   if (alphabétique === true) {
     dropdownItem.options.sort(function (a, b) {
@@ -21,7 +21,8 @@ function DropDown({ data }) {
   }
 
   const chooseOption = (e) => {
-    setCurrent(e.target.getAttribute('data-value'))
+    const selectedValue = e.target.getAttribute('data-value')
+    setCurrent(selectedValue)
     setIsOpen(false)
   }
 
@@ -30,7 +31,7 @@ function DropDown({ data }) {
   }
 
   const handleClickOutside = (e) => {
-    if (ref.current && !ref.current.contains(e.target)) {
+    if (dropDownContainerRef.current && !dropDownContainerRef.current.contains(e.target)) {
       setIsOpen(false)
     }
   }
@@ -43,7 +44,7 @@ function DropDown({ data }) {
   }, [])
 
   return (
-    <div ref={ref} className="dropdown-container">
+    <div ref={dropDownContainerRef} className="dropdown-container">
       <p>{dropdownItem.label}</p>
       <div className="dropdown">
         <div className={`dropdown-selected ${isOpen === true ? 'opened' : 'closed'}`} onClick={openClose}>
