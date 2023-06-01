@@ -1,7 +1,7 @@
 import '../Styles/modal.css'
 import { useState, useEffect, useRef } from 'react'
 
-function Modal({ show, onClose }) {
+function Modal({ show, onClose, text }) {
   const [isOpen, setIsOpen] = useState(show)
   const ref = useRef(null)
 
@@ -34,7 +34,7 @@ function Modal({ show, onClose }) {
         <div className="modal-container">
           <div ref={ref} className="modal">
             <i className="fa-solid fa-xmark close" onClick={() => handleClose()}></i>
-            <p>Employee Created</p>
+            <p>{text === 'created' ? 'Employee Created' : 'You must fulfill all fields'}</p>
           </div>
         </div>
       ) : null}

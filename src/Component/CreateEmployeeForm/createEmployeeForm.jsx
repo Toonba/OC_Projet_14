@@ -2,11 +2,13 @@ import '../../Styles/createEmployeeForm.css'
 import DropDown from '../../Plugin/dropdown'
 import { statesData } from '../../Data/stateData'
 import { departmentData } from '../../Data/departmentData'
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import Modal from '../../Modal/modale'
 
 export function CreateEmployeeForm() {
   const [isOpen, setIsOpen] = useState(false)
+  const [isValid, setIsValid] = useState(false)
+  const [isSubmitted, setIsSubmitted] = useState(false)
   const statesDataRefined = { label: statesData.label, options: statesData.options.map((element) => element.name) }
   const firstNameRef = useRef(null)
   const lastNameRef = useRef(null)
@@ -15,18 +17,24 @@ export function CreateEmployeeForm() {
   const streetRef = useRef(null)
   const cityRef = useRef(null)
   const zipCodeRef = useRef(null)
-  // const stateRef = useRef(null)
-  // const departementRef = useRef(null)
+  const stateRef = useRef(null)
+  const departmentRef = useRef(null)
 
   const handleModalClose = () => {
-    setIsOpen(false) 
+    setIsOpen(false)
   }
-  
-  const handleSelect = () =>{
-    
+
+  const handleStateChange = (selectedValue) => {
+    stateRef.current.value = selectedValue
+  }
+
+  const handleDepartmentChange = (selectedValue) => {
+    departmentRef.current.value = selectedValue
   }
 
   const handleSubmit = () => {
+    let formcheck = []
+    let formIsValid = false
     const employeeData = {
       firstName: firstNameRef.current.value,
       lastName: lastNameRef.current.value,
@@ -34,11 +42,30 @@ export function CreateEmployeeForm() {
       startDate: startDateRef.current.value,
       street: streetRef.current.value,
       city: cityRef.current.value,
-      zipCode: zipCodeRef.current.value
-      // state: stateRef.current.value,
-      // department: departementRef.current.value
+      zipCode: zipCodeRef.current.value,
+      state: stateRef.current.getCurrentValue(),
+      department: departmentRef.current.getCurrentValue()
     }
-    console.log(employeeData)
+    formcheck = []
+    for (let properties in employeeData) {
+      if (employeeData[properties] === null || employeeData[properties] === '') {
+        formcheck.push(false)
+      } else {
+        formcheck.push(true)
+      }
+    }
+    if (formcheck.includes(false)) {
+      setIsValid(false)
+      formIsValid = false
+    } else {
+      setIsValid(true)
+      formIsValid = true
+    }
+    if (formIsValid === true) {
+      console.log(employeeData)
+    } else {
+      console.log("vous n'avez pas remplis tous les champs")
+    }
     setIsOpen(!isOpen)
   }
 
@@ -88,7 +115,7 @@ export function CreateEmployeeForm() {
 
           <div className="second-row">
             <div className="state">
-              <DropDown data={statesDataRefined} />
+              <DropDown data={statesDataRefined} ref={stateRef} onChange={handleStateChange} />
             </div>
 
             <div className="zip">
@@ -99,8 +126,8 @@ export function CreateEmployeeForm() {
         </fieldset>
 
         <div className="department">
-          <DropDown data={departmentData} />
-          </div>
+          <DropDown data={departmentData} ref={departmentRef} onChange={handleDepartmentChange} />
+        </div>
         <div className="button">
           <button className="save" onClick={handleSubmit}>
             Save
@@ -108,7 +135,7 @@ export function CreateEmployeeForm() {
         </div>
       </form>
 
-      <Modal show={isOpen} onClose={handleModalClose} />
+      <Modal show={isOpen} onClose={handleModalClose} text={isValid === true ? 'created' : 'error'} />
     </>
   )
 }

@@ -1,7 +1,6 @@
 import { useState } from 'react'
 
 function EmployeeList() {
-
   return (
     <>
     </>

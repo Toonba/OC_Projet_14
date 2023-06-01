@@ -1,9 +1,9 @@
 import './dropdown.css'
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, forwardRef, useImperativeHandle } from 'react'
 
-export function DropDown({ data }) {
+export const DropDown = forwardRef((props, ref) => {
   const alphabétique = true
-  const dropdownItem = data
+  const dropdownItem = props.data
   const [isOpen, setIsOpen] = useState(false)
   const [current, setCurrent] = useState(null)
   const dropDownContainerRef = useRef(null)
@@ -20,10 +20,15 @@ export function DropDown({ data }) {
     })
   }
 
+  useImperativeHandle(ref, () => ({
+    getCurrentValue: () => current
+  }))
+
   const chooseOption = (e) => {
     const selectedValue = e.target.getAttribute('data-value')
     setCurrent(selectedValue)
     setIsOpen(false)
+    props.onChange(selectedValue)
   }
 
   const openClose = () => {
@@ -65,6 +70,6 @@ export function DropDown({ data }) {
       </div>
     </div>
   )
-}
+})
 
 export default DropDown
