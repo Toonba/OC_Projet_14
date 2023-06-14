@@ -11,12 +11,12 @@ export const TableTitle = styled.h2`
   text-decoration: underline;
 `
 
-export const SelectEntriesNumber = styled.div`
+export const TableOption = styled.div`
   width: 100%;
   margin 5px 0;
   display: flex; 
   justify-content: space-between;
-  align-items: center;
+  //align-items: center;
 
   .show {
     display: flex; 
@@ -28,8 +28,9 @@ export const SelectEntriesNumber = styled.div`
   }
   .search{
     display: flex;
-    align-item:center;
+    align-items:center;
     column-gap:10px;
+    
   }
 
 `
@@ -50,12 +51,15 @@ p{
   align-items:center;
   column-gap:10px;
   
-  .disabled{
-    opacity:0.2;
-  }
   i{
     cursor:pointer;
   }
+  
+  .disabled{
+    opacity:0.2;
+    cursor:default;
+  }
+  
 }
 `
 

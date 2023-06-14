@@ -2,7 +2,7 @@ import { type } from '@testing-library/user-event/dist/type'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import { Employee, EmployeeKeys } from '../../Data/EmployeeList'
-import { Caret, HeadingContainer, CustomeTable, TBody, THead, TableTitle, SelectEntriesNumber, ShowEntriesNumber, TableWrapper } from './Styled'
+import { Caret, HeadingContainer, CustomeTable, TBody, THead, TableTitle, ShowEntriesNumber, TableWrapper, TableOption } from './Styled'
 
 function Table() {
   const [sort, setSort] = useState('no')
@@ -15,7 +15,7 @@ function Table() {
   const [entriesEmployee, setEntriesEmployee] = useState([...currentArray.slice((currentPage - 1) * entriesToShow, entriesToShow * currentPage)])
   const [isSearch, setIsSearch] = useState(false)
 
-  // function handling sort 
+  // function handling sort
   const sorting = (type, key) => {
     if (type === 'up') {
       if (key.keyName === 'Date of Birth' || key.keyName === 'Start Date') {
@@ -102,11 +102,11 @@ function Table() {
     }
     getEmployeeSearchList(event.target.value.toLowerCase())
   }
-  
+
   // UseEffect
   useEffect(() => {
-    setPageNumber(Math.ceil(Employee.length / entriesToShow))
-  }, [entriesToShow])
+    setPageNumber(Math.ceil(currentArray.length / entriesToShow))
+  }, [entriesToShow, currentArray])
 
   useEffect(() => {
     setEntriesEmployee([...sortedEmployee.slice((currentPage - 1) * entriesToShow, entriesToShow * currentPage)])
@@ -126,7 +126,7 @@ function Table() {
     <>
       <TableWrapper>
         <TableTitle>Employee List</TableTitle>
-        <SelectEntriesNumber>
+        <TableOption>
           <div className="show">
             <p>Show</p>
             <select name="entries" id="entries" value={entriesToShow} onChange={handleEntriesSelection}>
@@ -141,7 +141,7 @@ function Table() {
             <i className="fa-solid fa-magnifying-glass"></i>
             <input type="text" id="search" placeholder="Search" onChange={(e) => handleSearch(e)} />
           </div>
-        </SelectEntriesNumber>
+        </TableOption>
         <CustomeTable id="myTable">
           <THead>
             <tr>
