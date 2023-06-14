@@ -1,9 +1,9 @@
 import '../../Styles/createEmployeeForm.css'
-import DropDown from '../../Plugin/dropdown'
+import DropDown from '../Dropdown/dropdown'
 import { statesData } from '../../Data/stateData'
 import { departmentData } from '../../Data/departmentData'
 import { useRef, useState, useEffect } from 'react'
-import Modal from '../../Modal/modale'
+import Modal from '../Modal/modale'
 
 export function CreateEmployeeForm() {
   const [isOpen, setIsOpen] = useState(false)

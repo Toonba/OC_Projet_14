@@ -1,4 +1,4 @@
-import '../Styles/modal.css'
+import '../../Styles/modal.css'
 import { useState, useEffect, useRef } from 'react'
 
 function Modal({ show, onClose, text }) {

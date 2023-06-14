@@ -1,8 +1,67 @@
 import styled from 'styled-components'
 
-export const Table = styled.table`
+export const TableWrapper = styled.div`
   width: 90%;
   margin: 30px auto;
+`
+
+export const TableTitle = styled.h2`
+  width: 100%;
+  margin: 30px 0
+  text-decoration: underline;
+`
+
+export const SelectEntriesNumber = styled.div`
+  width: 100%;
+  margin 5px 0;
+  display: flex; 
+  justify-content: space-between;
+  align-items: center;
+
+  .show {
+    display: flex; 
+    align-items: center;
+    column-gap: 10px;
+    p{
+      margin:0px;
+    }
+  }
+  .search{
+    display: flex;
+    align-item:center;
+    column-gap:10px;
+  }
+
+`
+
+export const ShowEntriesNumber = styled.div`
+width: 100%;
+margin 5px 0;
+display:flex;
+justify-content: space-between;
+align-items: center;
+
+p{
+  margin:0;
+}
+
+.pages{
+  display: flex; 
+  align-items:center;
+  column-gap:10px;
+  
+  .disabled{
+    opacity:0.2;
+  }
+  i{
+    cursor:pointer;
+  }
+}
+`
+
+export const CustomeTable = styled.table`
+  width: 100%;
+  margin: 30px 0;
   text-align: center;
   border-collapse: collapse;
   border: solid 1px rgba(145, 175, 37, 0.8);

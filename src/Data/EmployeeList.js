@@ -87,5 +87,49 @@ export const Employee = [
     state: 'Colorado',
     street: '18 bis avenue Rimbaud',
     zipCode: '38270'
+  },
+  {
+    city: 'Panama',
+    dateOfBirth: new Date('1987.10.28'),
+    department: 'Sales',
+    firstName: 'Brad',
+    lastName: 'Pit',
+    startDate: new Date('2001.03.16'),
+    state: 'Indiana',
+    street: '29 avenue Holywood',
+    zipCode: '71829'
+  },
+  {
+    city: 'Berlin',
+    dateOfBirth: new Date('1967.09.17'),
+    department: 'Marketing',
+    firstName: 'Luffy',
+    lastName: 'Mugiwara',
+    startDate: new Date('1996.02.10'),
+    state: 'Kansas',
+    street: '10 chemin du One Piece',
+    zipCode: '18203'
+  },
+  {
+    city: 'Moscou',
+    dateOfBirth: new Date('2001.06.28'),
+    department: 'Sales',
+    firstName: 'Soldat',
+    lastName: 'Hiver',
+    startDate: new Date('2020.03.20'),
+    state: 'Louisiana',
+    street: '26 rue polaire',
+    zipCode: '69100'
+  },
+  {
+    city: 'Pekin',
+    dateOfBirth: new Date('1994.09.20'),
+    department: 'Marketing',
+    firstName: 'Rick',
+    lastName: 'Sanchez',
+    startDate: new Date('2023.01.10'),
+    state: 'Michigan',
+    street: '10 rue du portail',
+    zipCode: '72510'
   }
 ]
