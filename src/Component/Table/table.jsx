@@ -15,8 +15,14 @@ function Table() {
   const [entriesEmployee, setEntriesEmployee] = useState([...currentArray.slice((currentPage - 1) * entriesToShow, entriesToShow * currentPage)])
   const [isSearch, setIsSearch] = useState(false)
 
+  // Résoudre problème, changement de nombre d'entré après avoir changer la page pour revenir à la page 1
+  // liste ne reviens pas a un état non trié après le troisième clique
+
   // function handling sort
   const sorting = (type, key) => {
+    if (currentPage !== 1) {
+      setCurrentPage(1)
+    }
     if (type === 'up') {
       if (key.keyName === 'Date of Birth' || key.keyName === 'Start Date') {
         const sorted = [...sortedEmployee.sort((a, b) => a[key.key].getTime() - b[key.key].getTime())]

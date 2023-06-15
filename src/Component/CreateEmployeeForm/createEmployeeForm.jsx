@@ -4,6 +4,7 @@ import { statesData } from '../../Data/stateData'
 import { departmentData } from '../../Data/departmentData'
 import { useRef, useState, useEffect } from 'react'
 import Modal from '../Modal/modale'
+import { useDispatch, useSelector } from 'react-redux'
 
 export function CreateEmployeeForm() {
   const [isOpen, setIsOpen] = useState(false)
@@ -19,6 +20,8 @@ export function CreateEmployeeForm() {
   const zipCodeRef = useRef(null)
   const stateRef = useRef(null)
   const departmentRef = useRef(null)
+  const dispatch = useDispatch()
+
 
   const handleModalClose = () => {
     setIsOpen(false)
