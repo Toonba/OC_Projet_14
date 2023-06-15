@@ -5,70 +5,44 @@ import { departmentData } from '../../Data/departmentData'
 import { useRef, useState, useEffect } from 'react'
 import Modal from '../Modal/modale'
 import { useDispatch, useSelector } from 'react-redux'
+import { selectState, selectDepartment, addEmployee } from '../../store/store'
 
 export function CreateEmployeeForm() {
+  const Employee = useSelector((state) => state.employee)
   const [isOpen, setIsOpen] = useState(false)
-  const [isValid, setIsValid] = useState(false)
+  const [isValid, setIsValid] = useState(true)
   const [isSubmitted, setIsSubmitted] = useState(false)
   const statesDataRefined = { label: statesData.label, options: statesData.options.map((element) => element.name) }
-  const firstNameRef = useRef(null)
-  const lastNameRef = useRef(null)
-  const dateOfBirthRef = useRef(null)
-  const startDateRef = useRef(null)
-  const streetRef = useRef(null)
-  const cityRef = useRef(null)
-  const zipCodeRef = useRef(null)
-  const stateRef = useRef(null)
-  const departmentRef = useRef(null)
+  const [firstName, setFirstName] = useState('')
+  const [lastName, setLastName] = useState('')
+  const dateOfBirth = useSelector((state) => state.dateOfBirth)
+  const startDate = useSelector((state) => state.startDate)
+  const [street, setStreet] = useState('')
+  const [city, setCity] = useState('')
+  const [zipCode, setZipCode] = useState('')
+  const state = useSelector((state) => state.state)
+  const department = useSelector((state) => state.department)
   const dispatch = useDispatch()
-
 
   const handleModalClose = () => {
     setIsOpen(false)
   }
 
-  const handleStateChange = (selectedValue) => {
-    stateRef.current.value = selectedValue
-  }
-
-  const handleDepartmentChange = (selectedValue) => {
-    departmentRef.current.value = selectedValue
-  }
-
   const handleSubmit = () => {
-    let formcheck = []
-    let formIsValid = false
     const employeeData = {
-      firstName: firstNameRef.current.value,
-      lastName: lastNameRef.current.value,
-      dateOfBirth: dateOfBirthRef.current.value,
-      startDate: startDateRef.current.value,
-      street: streetRef.current.value,
-      city: cityRef.current.value,
-      zipCode: zipCodeRef.current.value,
-      state: stateRef.current.getCurrentValue(),
-      department: departmentRef.current.getCurrentValue()
+      firstName: firstName,
+      lastName: lastName,
+      dateOfBirth: '',
+      startDate: '',
+      street: street,
+      city: city,
+      zipCode: zipCode,
+      state: state,
+      department: department
     }
-    formcheck = []
-    for (let properties in employeeData) {
-      if (employeeData[properties] === null || employeeData[properties] === '') {
-        formcheck.push(false)
-      } else {
-        formcheck.push(true)
-      }
-    }
-    if (formcheck.includes(false)) {
-      setIsValid(false)
-      formIsValid = false
-    } else {
-      setIsValid(true)
-      formIsValid = true
-    }
-    if (formIsValid === true) {
-      console.log(employeeData)
-    } else {
-      console.log("vous n'avez pas remplis tous les champs")
-    }
+    dispatch(addEmployee(employeeData))
+    console.log(Employee)
+
     setIsOpen(!isOpen)
   }
 
@@ -80,23 +54,23 @@ export function CreateEmployeeForm() {
           <div className="first-row">
             <div className="firstname">
               <label htmlFor="first-name">First Name</label>
-              <input type="text" id="first-name" placeholder="Steve" ref={firstNameRef} />
+              <input type="text" id="first-name" placeholder="Steve" onChange={(e) => setFirstName(e.target.value)} />
             </div>
 
             <div className="lastname">
               <label htmlFor="last-name">Last Name</label>
-              <input type="text" id="last-name" placeholder="Rogers" ref={lastNameRef} />
+              <input type="text" id="last-name" placeholder="Rogers" onChange={(e) => setLastName(e.target.value)} />
             </div>
           </div>
           <div className="second-row">
             <div className="birth-date">
               <label htmlFor="date-of-birth">Date of Birth</label>
-              <input id="date-of-birth" type="text" ref={dateOfBirthRef} />
+              <input id="date-of-birth" type="text" />
             </div>
 
             <div className="start-date">
               <label htmlFor="start-date">Start Date</label>
-              <input id="start-date" type="text" ref={startDateRef} />
+              <input id="start-date" type="text" />
             </div>
           </div>
         </fieldset>
@@ -107,29 +81,29 @@ export function CreateEmployeeForm() {
           <div className="first-row">
             <div className="street">
               <label htmlFor="street">Street</label>
-              <input id="street" type="text" placeholder="1600, Pennsylvania Avenue NW" ref={streetRef} />
+              <input id="street" type="text" placeholder="1600, Pennsylvania Avenue NW" onChange={(e) => setStreet(e.target.value)} />
             </div>
 
             <div className="city">
               <label htmlFor="city">City</label>
-              <input id="city" type="text" placeholder="Washington, DC" ref={cityRef} />
+              <input id="city" type="text" placeholder="Washington, DC" onChange={(e) => setCity(e.target.value)} />
             </div>
           </div>
 
           <div className="second-row">
             <div className="state">
-              <DropDown data={statesDataRefined} ref={stateRef} onChange={handleStateChange} />
+              <DropDown data={statesDataRefined} actionType={selectState} />
             </div>
 
             <div className="zip">
               <label htmlFor="zip-code">Zip Code</label>
-              <input id="zip-code" type="number" placeholder="20500" ref={zipCodeRef} />
+              <input id="zip-code" type="number" placeholder="20500" onChange={(e) => setZipCode(e.target.value)} />
             </div>
           </div>
         </fieldset>
 
         <div className="department">
-          <DropDown data={departmentData} ref={departmentRef} onChange={handleDepartmentChange} />
+          <DropDown data={departmentData} actionType={selectDepartment} />
         </div>
         <div className="button">
           <button className="save" onClick={handleSubmit}>

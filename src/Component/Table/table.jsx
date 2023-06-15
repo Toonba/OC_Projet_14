@@ -1,10 +1,12 @@
 import { type } from '@testing-library/user-event/dist/type'
 import { useEffect } from 'react'
 import { useState } from 'react'
-import { Employee, EmployeeKeys } from '../../Data/EmployeeList'
+import { EmployeeKeys } from '../../Data/EmployeeList'
 import { Caret, HeadingContainer, CustomeTable, TBody, THead, TableTitle, ShowEntriesNumber, TableWrapper, TableOption } from './Styled'
+import { useDispatch, useSelector } from 'react-redux'
 
 function Table() {
+  const Employee = useSelector((state) => state.employee)
   const [sort, setSort] = useState('no')
   const [currentSort, setCurrentSort] = useState('no')
   const [currentArray, setCurrentArray] = useState([...Employee])
@@ -172,9 +174,9 @@ function Table() {
                 <tr key={`${index}-${employee}`}>
                   <td>{employee.firstName}</td>
                   <td>{employee.lastName}</td>
-                  <td>{employee.startDate.toLocaleDateString()}</td>
+                  <td>{new Date(employee.startDate).toLocaleDateString()}</td>
                   <td>{employee.department}</td>
-                  <td>{employee.dateOfBirth.toLocaleDateString()}</td>
+                  <td>{new Date(employee.dateOfBirth).toLocaleDateString()}</td>
                   <td>{employee.street}</td>
                   <td>{employee.city}</td>
                   <td>{employee.state}</td>

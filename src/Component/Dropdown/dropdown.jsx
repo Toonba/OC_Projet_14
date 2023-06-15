@@ -1,12 +1,14 @@
 import './dropdown.css'
 import { useState, useEffect, useRef, forwardRef, useImperativeHandle } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
-export const DropDown = forwardRef((props, ref) => {
+export function DropDown ({data, actionType}){
   const alphabétique = true
-  const dropdownItem = props.data
+  const dropdownItem = data
   const [isOpen, setIsOpen] = useState(false)
   const [current, setCurrent] = useState(null)
   const dropDownContainerRef = useRef(null)
+  const dispatch = useDispatch()
 
   if (alphabétique === true) {
     dropdownItem.options.sort(function (a, b) {
@@ -20,15 +22,11 @@ export const DropDown = forwardRef((props, ref) => {
     })
   }
 
-  useImperativeHandle(ref, () => ({
-    getCurrentValue: () => current
-  }))
-
   const chooseOption = (e) => {
     const selectedValue = e.target.getAttribute('data-value')
     setCurrent(selectedValue)
     setIsOpen(false)
-    props.onChange(selectedValue)
+    dispatch(actionType(selectedValue))
   }
 
   const openClose = () => {
@@ -70,6 +68,6 @@ export const DropDown = forwardRef((props, ref) => {
       </div>
     </div>
   )
-})
+}
 
 export default DropDown
