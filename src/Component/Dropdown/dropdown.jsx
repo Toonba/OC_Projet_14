@@ -2,7 +2,8 @@ import './dropdown.css'
 import { useState, useEffect, useRef, forwardRef, useImperativeHandle } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-export function DropDown ({data, actionType}){
+export function DropDown({ data, actionType, dropDownSelector }) {
+  // const test = useSelector((state) => state.department)
   const alphabétique = true
   const dropdownItem = data
   const [isOpen, setIsOpen] = useState(false)
@@ -26,6 +27,7 @@ export function DropDown ({data, actionType}){
     const selectedValue = e.target.getAttribute('data-value')
     setCurrent(selectedValue)
     setIsOpen(false)
+    console.log(current)
     dispatch(actionType(selectedValue))
   }
 
@@ -45,6 +47,12 @@ export function DropDown ({data, actionType}){
       document.removeEventListener('click', handleClickOutside)
     }
   }, [])
+
+  useEffect(() => {
+    if (dropDownSelector === '') {
+      setCurrent(null)
+    }
+  }, [dropDownSelector])
 
   return (
     <div ref={dropDownContainerRef} className="dropdown-container">

@@ -2,12 +2,12 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top:10px;
-  border-bottom: solid 2px #93AD18;
+  margin-top: 10px;
+  border-bottom: solid 2px #93ad18;
 }
 
 header .logo img {
-  width:150px;
+  width: 150px;
   margin-left: 100px;
 }
 
@@ -16,7 +16,7 @@ header nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 500px
+  width: 500px;
 }
 
 header nav a {
@@ -24,7 +24,7 @@ header nav a {
   color: black;
   font-weight: bold;
   font-size: 24px;
-  background-color: #93AD18;
+  background-color: rgba(145, 175, 37, 0.8);
   padding: 10px 20px;
   border-radius: 10px;
 }

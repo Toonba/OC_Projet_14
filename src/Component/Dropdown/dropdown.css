@@ -71,6 +71,10 @@
   cursor: pointer;
 }
 
+.dropdown-container .dropdown-item span:hover {
+  background-color: rgba(145, 175, 37, 0.2);
+}
+
 .dropdown-container .dropdown-item .active {
   background-color: var(--dropdown-current-option-bg);
 }

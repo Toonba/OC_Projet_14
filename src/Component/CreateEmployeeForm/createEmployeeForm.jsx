@@ -11,7 +11,6 @@ export function CreateEmployeeForm() {
   const Employee = useSelector((state) => state.employee)
   const [isOpen, setIsOpen] = useState(false)
   const [isValid, setIsValid] = useState(true)
-  const [isSubmitted, setIsSubmitted] = useState(false)
   const statesDataRefined = { label: statesData.label, options: statesData.options.map((element) => element.name) }
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
@@ -29,20 +28,30 @@ export function CreateEmployeeForm() {
   }
 
   const handleSubmit = () => {
-    const employeeData = {
-      firstName: firstName,
-      lastName: lastName,
-      dateOfBirth: '',
-      startDate: '',
-      street: street,
-      city: city,
-      zipCode: zipCode,
-      state: state,
-      department: department
+    if (firstName === '' || lastName === '' || street === '' || city === '' || zipCode === '' || state === '' || department === '') {
+      setIsValid(false)
+    } else {
+      const employeeData = {
+        firstName: firstName,
+        lastName: lastName,
+        dateOfBirth: '',
+        startDate: '',
+        street: street,
+        city: city,
+        zipCode: zipCode,
+        state: state,
+        department: department
+      }
+      dispatch(addEmployee(employeeData))
+      setIsValid(true)
+      setFirstName('')
+      setLastName('')
+      setStreet('')
+      setCity('')
+      setZipCode('')
+      dispatch(selectState(''))
+      dispatch(selectDepartment(''))
     }
-    dispatch(addEmployee(employeeData))
-    console.log(Employee)
-
     setIsOpen(!isOpen)
   }
 
@@ -54,12 +63,12 @@ export function CreateEmployeeForm() {
           <div className="first-row">
             <div className="firstname">
               <label htmlFor="first-name">First Name</label>
-              <input type="text" id="first-name" placeholder="Steve" onChange={(e) => setFirstName(e.target.value)} />
+              <input type="text" id="first-name" placeholder="Steve" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
             </div>
 
             <div className="lastname">
               <label htmlFor="last-name">Last Name</label>
-              <input type="text" id="last-name" placeholder="Rogers" onChange={(e) => setLastName(e.target.value)} />
+              <input type="text" id="last-name" placeholder="Rogers" value={lastName} onChange={(e) => setLastName(e.target.value)} />
             </div>
           </div>
           <div className="second-row">
@@ -81,32 +90,32 @@ export function CreateEmployeeForm() {
           <div className="first-row">
             <div className="street">
               <label htmlFor="street">Street</label>
-              <input id="street" type="text" placeholder="1600, Pennsylvania Avenue NW" onChange={(e) => setStreet(e.target.value)} />
+              <input id="street" type="text" placeholder="1600, Pennsylvania Avenue NW" value={street} onChange={(e) => setStreet(e.target.value)} />
             </div>
 
             <div className="city">
               <label htmlFor="city">City</label>
-              <input id="city" type="text" placeholder="Washington, DC" onChange={(e) => setCity(e.target.value)} />
+              <input id="city" type="text" placeholder="Washington, DC" value={city} onChange={(e) => setCity(e.target.value)} />
             </div>
           </div>
 
           <div className="second-row">
             <div className="state">
-              <DropDown data={statesDataRefined} actionType={selectState} />
+              <DropDown data={statesDataRefined} actionType={selectState} dropDownSelector={state} />
             </div>
 
             <div className="zip">
               <label htmlFor="zip-code">Zip Code</label>
-              <input id="zip-code" type="number" placeholder="20500" onChange={(e) => setZipCode(e.target.value)} />
+              <input id="zip-code" type="number" placeholder="20500" value={zipCode} onChange={(e) => setZipCode(e.target.value)} />
             </div>
           </div>
         </fieldset>
 
         <div className="department">
-          <DropDown data={departmentData} actionType={selectDepartment} />
+          <DropDown data={departmentData} actionType={selectDepartment} dropDownSelector={department} />
         </div>
         <div className="button">
-          <button className="save" onClick={handleSubmit}>
+          <button className="save" type="button" onClick={handleSubmit}>
             Save
           </button>
         </div>

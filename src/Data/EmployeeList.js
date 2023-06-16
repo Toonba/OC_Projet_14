@@ -13,7 +13,7 @@ export const EmployeeKeys = [
 export const Employee = [
   {
     city: 'Villeurbanne',
-    dateOfBirth: '1994-12-28T00:00:00.000Z',
+    dateOfBirth: new Date('1994.12.28').toISOString(),
     department: 'Sales',
     firstName: 'Steve',
     lastName: 'Rogers',

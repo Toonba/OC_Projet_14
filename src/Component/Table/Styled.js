@@ -30,7 +30,6 @@ export const TableOption = styled.div`
     display: flex;
     align-items:center;
     column-gap:10px;
-    
   }
 
 `
@@ -86,6 +85,7 @@ export const THead = styled.thead`
 export const TBody = styled.tbody`
   tr {
     border-bottom: 1px solid rgba(145, 175, 37, 0.8);
+    position: relative;
   }
 
   tr:nth-child(odd) {

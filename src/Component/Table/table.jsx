@@ -1,9 +1,8 @@
-import { type } from '@testing-library/user-event/dist/type'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import { EmployeeKeys } from '../../Data/EmployeeList'
 import { Caret, HeadingContainer, CustomeTable, TBody, THead, TableTitle, ShowEntriesNumber, TableWrapper, TableOption } from './Styled'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 function Table() {
   const Employee = useSelector((state) => state.employee)
@@ -14,11 +13,8 @@ function Table() {
   const [entriesToShow, setEntriesToShow] = useState('10')
   const [pageNumber, setPageNumber] = useState(1)
   const [currentPage, setCurrentPage] = useState(1)
-  const [entriesEmployee, setEntriesEmployee] = useState([...currentArray.slice((currentPage - 1) * entriesToShow, entriesToShow * currentPage)])
+  const [entriesEmployee, setEntriesEmployee] = useState([...currentArray].slice((currentPage - 1) * entriesToShow, entriesToShow * currentPage))
   const [isSearch, setIsSearch] = useState(false)
-
-  // Résoudre problème, changement de nombre d'entré après avoir changer la page pour revenir à la page 1
-  // liste ne reviens pas a un état non trié après le troisième clique
 
   // function handling sort
   const sorting = (type, key) => {
@@ -27,19 +23,19 @@ function Table() {
     }
     if (type === 'up') {
       if (key.keyName === 'Date of Birth' || key.keyName === 'Start Date') {
-        const sorted = [...sortedEmployee.sort((a, b) => a[key.key].getTime() - b[key.key].getTime())]
+        const sorted = [...sortedEmployee].sort((a, b) => new Date(a[key.key]).getTime() - new Date(b[key.key]).getTime())
         setSortedEmployee(sorted)
       } else {
-        const sorted = [...sortedEmployee.sort((a, b) => a[key.key].localeCompare(b[key.key]))]
+        const sorted = [...sortedEmployee].sort((a, b) => a[key.key].localeCompare(b[key.key]))
         setSortedEmployee(sorted)
       }
       setSort(type)
     } else if (type === 'down') {
       if (key.keyName === 'Date of Birth' || key.keyName === 'Start Date') {
-        const sorted = [...sortedEmployee].sort((a, b) => b[key.key].getTime() - a[key.key].getTime())
+        const sorted = [...sortedEmployee].sort((a, b) => new Date(b[key.key]).getTime() - new Date(a[key.key]).getTime())
         setSortedEmployee(sorted)
       } else {
-        const sorted = [...sortedEmployee.sort((a, b) => b[key.key].localeCompare(a[key.key]))]
+        const sorted = [...sortedEmployee].sort((a, b) => b[key.key].localeCompare(a[key.key]))
         setSortedEmployee(sorted)
       }
       setSort(type)
@@ -79,6 +75,7 @@ function Table() {
 
   const handleEntriesSelection = (event) => {
     setEntriesToShow(event.target.value)
+    setCurrentPage(1)
   }
 
   // function handling search feature
