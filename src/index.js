@@ -1,10 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import './Styles/index.css'
+import './index.css'
 import CreateEmployee from './Pages/CreateEmployee/createEmployee'
 import EmployeeList from './Pages/EmployeeList/employeeList.jsx'
-import { Header } from './Component/Header/header'
+import Header from './Component/Header/header'
 import store from './store/store'
 import { Provider } from 'react-redux'
 

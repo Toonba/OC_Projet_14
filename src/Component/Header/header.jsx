@@ -1,11 +1,11 @@
 import Logo from '../../Asset/Wealth_Health.png'
 import { Link, useLocation } from 'react-router-dom'
-import '../../Styles/header.css'
+import { CustomHeader } from './Styled'
 
-export function Header() {
+function Header() {
   const location = useLocation()
   return (
-    <header>
+    <CustomHeader>
       <div className="logo">
         <img src={Logo} alt="Logo société wealt health" />
       </div>
@@ -17,6 +17,8 @@ export function Header() {
           Employee List
         </Link>
       </nav>
-    </header>
+    </CustomHeader>
   )
 }
+
+export default Header

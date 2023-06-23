@@ -106,6 +106,7 @@ function Table() {
       setIsSearch(false)
     }
     getEmployeeSearchList(event.target.value.toLowerCase())
+    setCurrentPage(1)
   }
 
   // UseEffect

@@ -1,11 +1,12 @@
-import '../../Styles/createEmployeeForm.css'
 import DropDown from '../Dropdown/dropdown'
 import { statesData } from '../../Data/stateData'
 import { departmentData } from '../../Data/departmentData'
 import { useRef, useState, useEffect } from 'react'
 import Modal from '../Modal/modale'
 import { useDispatch, useSelector } from 'react-redux'
-import { selectState, selectDepartment, addEmployee } from '../../store/store'
+import { selectState, selectDepartment, addEmployee, selectDateOfBirth, selectStartDate } from '../../store/store'
+import { CustomeForm } from './Styled'
+import { DatePicker, config } from 'toonba-react-date-picker-library'
 
 export function CreateEmployeeForm() {
   const Employee = useSelector((state) => state.employee)
@@ -27,15 +28,22 @@ export function CreateEmployeeForm() {
     setIsOpen(false)
   }
 
+  const manageDateOfBirth = (selectedValue) => {
+    dispatch(selectDateOfBirth(selectedValue.toISOString()))
+  }
+  const manageStartDate = (selectedValue) => {
+    dispatch(selectStartDate(selectedValue.toISOString()))
+  }
+
   const handleSubmit = () => {
-    if (firstName === '' || lastName === '' || street === '' || city === '' || zipCode === '' || state === '' || department === '') {
+    if (firstName === '' || lastName === '' || dateOfBirth === '' || startDate === '' || street === '' || city === '' || zipCode === '' || state === '' || department === '') {
       setIsValid(false)
     } else {
       const employeeData = {
         firstName: firstName,
         lastName: lastName,
-        dateOfBirth: '',
-        startDate: '',
+        dateOfBirth: dateOfBirth,
+        startDate: startDate,
         street: street,
         city: city,
         zipCode: zipCode,
@@ -49,15 +57,19 @@ export function CreateEmployeeForm() {
       setStreet('')
       setCity('')
       setZipCode('')
+      dispatch(selectDateOfBirth(''))
+      dispatch(selectStartDate(''))
       dispatch(selectState(''))
       dispatch(selectDepartment(''))
     }
     setIsOpen(!isOpen)
   }
 
+  console.log(new Date().toLocaleDateString())
+
   return (
     <>
-      <form action="#" id="create-employeer-form">
+      <CustomeForm action="#" id="create-employeer-form">
         <fieldset className="employee">
           <legend>Employee's information</legend>
           <div className="first-row">
@@ -73,13 +85,13 @@ export function CreateEmployeeForm() {
           </div>
           <div className="second-row">
             <div className="birth-date">
-              <label htmlFor="date-of-birth">Date of Birth</label>
-              <input id="date-of-birth" type="text" />
+              <label htmlFor="last-name">Birth Date</label>
+              <DatePicker minDate={new Date('01.01.1923')} maxDate={new Date('12.31.2010')} customStyle={config.lightTheme} getData={manageDateOfBirth} inputReset={dateOfBirth} />
             </div>
 
             <div className="start-date">
               <label htmlFor="start-date">Start Date</label>
-              <input id="start-date" type="text" />
+              <DatePicker minDate={config.minDate} maxDate={new Date('12.31.2023')} customStyle={config.lightTheme} getData={manageStartDate} inputReset={startDate} />
             </div>
           </div>
         </fieldset>
@@ -119,7 +131,7 @@ export function CreateEmployeeForm() {
             Save
           </button>
         </div>
-      </form>
+      </CustomeForm>
 
       <Modal show={isOpen} onClose={handleModalClose} text={isValid === true ? 'created' : 'error'} />
     </>

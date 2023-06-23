@@ -1,5 +1,5 @@
-import '../../Styles/modal.css'
 import { useState, useEffect, useRef } from 'react'
+import { CustomModal } from './Styled'
 
 function Modal({ show, onClose, text }) {
   const [isOpen, setIsOpen] = useState(show)
@@ -31,12 +31,12 @@ function Modal({ show, onClose, text }) {
   return (
     <>
       {isOpen ? (
-        <div className="modal-container">
+        <CustomModal >
           <div ref={ref} className="modal">
             <i className="fa-solid fa-xmark close" onClick={() => handleClose()}></i>
             <p>{text === 'created' ? 'Employee Created' : 'You must fulfill all fields'}</p>
           </div>
-        </div>
+        </CustomModal>
       ) : null}
     </>
   )

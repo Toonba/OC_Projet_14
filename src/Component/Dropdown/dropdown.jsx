@@ -1,6 +1,6 @@
-import './dropdown.css'
 import { useState, useEffect, useRef, forwardRef, useImperativeHandle } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { DropDownContainer } from './Styled'
 
 export function DropDown({ data, actionType, dropDownSelector }) {
   // const test = useSelector((state) => state.department)
@@ -55,7 +55,7 @@ export function DropDown({ data, actionType, dropDownSelector }) {
   }, [dropDownSelector])
 
   return (
-    <div ref={dropDownContainerRef} className="dropdown-container">
+    <DropDownContainer ref={dropDownContainerRef}>
       <p>{dropdownItem.label}</p>
       <div className="dropdown">
         <div className={`dropdown-selected ${isOpen === true ? 'opened' : 'closed'}`} onClick={openClose}>
@@ -74,7 +74,7 @@ export function DropDown({ data, actionType, dropDownSelector }) {
           </div>
         </div>
       </div>
-    </div>
+    </DropDownContainer>
   )
 }
 
