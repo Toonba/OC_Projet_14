@@ -55,6 +55,7 @@ export const CustomeForm = styled.form`
     padding: 5px 10px;
     border-radius: 5px;
     border: solid 1px black;
+    text-align: center;
   }
 
   .employee input:focus,

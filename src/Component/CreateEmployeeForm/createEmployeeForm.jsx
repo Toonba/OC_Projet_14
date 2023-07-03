@@ -65,8 +65,6 @@ export function CreateEmployeeForm() {
     setIsOpen(!isOpen)
   }
 
-  console.log(new Date().toLocaleDateString())
-
   return (
     <>
       <CustomeForm action="#" id="create-employeer-form">
@@ -86,7 +84,7 @@ export function CreateEmployeeForm() {
           <div className="second-row">
             <div className="birth-date">
               <label htmlFor="last-name">Birth Date</label>
-              <DatePicker minDate={new Date('01.01.1923')} maxDate={new Date('12.31.2010')} customStyle={config.lightTheme} getData={manageDateOfBirth} inputReset={dateOfBirth} />
+              <DatePicker minDate={new Date('01.01.1923')} maxDate={new Date('12.31.2023')} customStyle={config.lightTheme} getData={manageDateOfBirth} inputReset={dateOfBirth} />
             </div>
 
             <div className="start-date">
