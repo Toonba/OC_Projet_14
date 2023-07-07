@@ -81,13 +81,13 @@ export const THead = styled.thead`
     border-right: 1px solid rgba(145, 175, 37, 0.8);
   }
   th:nth-child(1) {
-    width: 107px;
+    width: 110px;
   }
   th:nth-child(2) {
-    width: 105px;
+    width: 110px;
   }
   th:nth-child(3) {
-    width: 102px;
+    width: 110px;
   }
   th:nth-child(4) {
     width: 160px;
@@ -99,13 +99,13 @@ export const THead = styled.thead`
     width: 200px;
   }
   th:nth-child(7) {
-    width: 101px;
+    width: 110px;
   }
   th:nth-child(8) {
-    width: 76px;
+    width: 80px;
   }
   th:nth-child(9) {
-    width: 87px;
+    width: 100px;
   }
 `
 
@@ -128,8 +128,9 @@ export const TBody = styled.tbody`
 export const HeadingContainer = styled.div`
   width: 100%;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
+  padding: 0px 5px;
 `
 export const Caret = styled.span`
   display: flex;
