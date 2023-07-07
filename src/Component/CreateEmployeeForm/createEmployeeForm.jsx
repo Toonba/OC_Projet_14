@@ -1,7 +1,7 @@
 import DropDown from '../Dropdown/dropdown'
 import { statesData } from '../../Data/stateData'
 import { departmentData } from '../../Data/departmentData'
-import { useRef, useState, useEffect } from 'react'
+import { useState } from 'react'
 import Modal from '../Modal/modale'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectState, selectDepartment, addEmployee, selectDateOfBirth, selectStartDate } from '../../store/store'
@@ -9,7 +9,6 @@ import { CustomeForm } from './Styled'
 import { DatePicker, config } from 'toonba-react-date-picker-library'
 
 export function CreateEmployeeForm() {
-  const Employee = useSelector((state) => state.employee)
   const [isOpen, setIsOpen] = useState(false)
   const [isValid, setIsValid] = useState(true)
   const statesDataRefined = { label: statesData.label, options: statesData.options.map((element) => element.name) }

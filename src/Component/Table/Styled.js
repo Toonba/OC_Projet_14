@@ -80,6 +80,33 @@ export const THead = styled.thead`
     cursor: pointer;
     border-right: 1px solid rgba(145, 175, 37, 0.8);
   }
+  th:nth-child(1) {
+    width: 107px;
+  }
+  th:nth-child(2) {
+    width: 105px;
+  }
+  th:nth-child(3) {
+    width: 102px;
+  }
+  th:nth-child(4) {
+    width: 160px;
+  }
+  th:nth-child(5) {
+    width: 123px;
+  }
+  th:nth-child(6) {
+    width: 200px;
+  }
+  th:nth-child(7) {
+    width: 101px;
+  }
+  th:nth-child(8) {
+    width: 76px;
+  }
+  th:nth-child(9) {
+    width: 87px;
+  }
 `
 
 export const TBody = styled.tbody`
